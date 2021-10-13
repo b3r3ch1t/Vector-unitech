@@ -74,12 +74,12 @@ namespace Vector_unitech_api.Controllers
 
             user.Password = "";
 
-            return new
+            return Ok( new
             {
                 user = user,
                 token = token.Result
-            };
+            } );
         }
-         
+
     }
 }
