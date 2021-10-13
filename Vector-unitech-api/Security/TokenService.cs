@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Vector_unitech_api.Security.Configurations;
 using vector_unitech_core.Utils;
@@ -85,37 +84,10 @@ namespace Vector_unitech_api.Security
                 Message = "OK"
             };
 
-            // Armazena o refresh token em cache através do Redis 
-            var refreshTokenData = new RefreshTokenDataModel
-            {
-                RefreshToken = resultado.RefreshToken,
-                UserID = user.Id
-            };
-
-
-            // Calcula o tempo máximo de validade do refresh token
-            // (o mesmo será invalidado automaticamente pelo Redis)
-            var finalExpiration =
-                TimeSpan.FromSeconds( _tokenConfigurations.FinalExpiration );
-
-            var opcoesCache =
-                new DistributedCacheEntryOptions();
-            opcoesCache.SetAbsoluteExpiration( finalExpiration );
-            try
-            {
-                await _cache.SetStringAsync( resultado.RefreshToken,
-                    JsonSerializer.Serialize( refreshTokenData ),
-                    opcoesCache );
-            }
-            catch ( Exception e )
-            {
-
-                Console.WriteLine( e.Message );
-
-            }
 
 
             return new OperationResult<Token>( resultado );
         }
+
     }
 }

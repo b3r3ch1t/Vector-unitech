@@ -77,9 +77,9 @@ namespace Vector_unitech_api.Controllers
             return new
             {
                 user = user,
-                token = token
+                token = token.Result
             };
         }
-
+         
     }
 }
