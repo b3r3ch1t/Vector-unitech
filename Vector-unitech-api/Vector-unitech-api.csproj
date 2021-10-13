@@ -1,19 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Vector_unitech_api</RootNamespace>
-    <UserSecretsId>046b13b4-3436-4913-9d0e-9af97e4f470f</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<RootNamespace>Vector_unitech_api</RootNamespace>
+		<UserSecretsId>046b13b4-3436-4913-9d0e-9af97e4f470f</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Serilog.Sinks.Sentry" Version="2.4.3" />
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+		<PackageReference Include="Serilog" Version="2.10.0" />
+		<PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Controllers\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ErroSentry\vector-unitech-log.csproj" />
+		<ProjectReference Include="..\vector-unitech-core\vector-unitech-core\vector-unitech-core.csproj" />
+	</ItemGroup>
 
 </Project>

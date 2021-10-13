@@ -4,18 +4,46 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
+using vector_unitech.log;
+using Vector_unitech_api.Extensions;
+using vector_unitech_core.Interfaces;
 
 namespace Vector_unitech_api
 {
     public class Startup
     {
-        public Startup( IConfiguration configuration )
+        private IWebHostEnvironment WebHostEnvironment { get; }
+        public IConfiguration Configuration { get; }
+
+        public Startup( IWebHostEnvironment env )
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath( env.ContentRootPath );
+
+            if ( env.IsStaging() )
+            {
+                builder.AddEnvironmentVariables();
+            }
+
+            if ( env.IsDevelopment() )
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+
+            if ( env.IsProduction() )
+            {
+                builder.AddJsonFile( "appsettings.json", true, true );
+            }
+
+
+            Configuration = builder.Build();
+
+            WebHostEnvironment = env;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices( IServiceCollection services )
@@ -24,7 +52,7 @@ namespace Vector_unitech_api
             services.AddControllers();
 
 
-            //Swagger
+            #region Swagger
             services.AddSwaggerGen( options =>
             {
                 options.SwaggerDoc( "v1", new OpenApiInfo()
@@ -43,6 +71,50 @@ namespace Vector_unitech_api
 
 
             } );
+
+            #endregion
+
+            #region Erro Centralizado
+
+            services.AddGlobalExceptionHandlerMiddleware();
+
+            #endregion
+
+            #region  Log
+
+            var sentryDsn = Configuration[ "SentryDsn" ];
+            if ( !string.IsNullOrEmpty( sentryDsn ) )
+            {
+                Serilog.Core.Logger log = null;
+
+
+                if ( WebHostEnvironment.IsStaging() || WebHostEnvironment.IsProduction() )
+                {
+                    log = new LoggerConfiguration()
+                        .Enrich.FromLogContext()
+                        .WriteTo.ColoredConsole()
+                        .WriteTo.Sentry( sentryDsn )
+                        .CreateLogger();
+                }
+
+                if ( WebHostEnvironment.IsDevelopment() )
+                {
+                    log = new LoggerConfiguration()
+                        .Enrich.FromLogContext()
+                        .WriteTo.ColoredConsole()
+                        .CreateLogger();
+                }
+
+
+                services.AddScoped<Serilog.ILogger>( x => log );
+
+                services.AddSingleton<IError, ErroSentry>( x => new ErroSentry( sentryDsn ) );
+
+            }
+
+
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

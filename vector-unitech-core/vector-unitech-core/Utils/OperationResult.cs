@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using vector_unitech_core.Interfaces;
 
 namespace vector_unitech_core.Utils
 {

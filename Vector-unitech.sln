@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vector-unitech-core", "vect
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vector-unitech-service", "vector-unitech-service\vector-unitech-service.csproj", "{D92C1E2A-B84A-4F7D-B4AD-6C42E9963E07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vector-unitech-log", "ErroSentry\vector-unitech-log.csproj", "{BF0CACBE-5133-459B-B4D4-2E01B3BB1D00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D92C1E2A-B84A-4F7D-B4AD-6C42E9963E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D92C1E2A-B84A-4F7D-B4AD-6C42E9963E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D92C1E2A-B84A-4F7D-B4AD-6C42E9963E07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF0CACBE-5133-459B-B4D4-2E01B3BB1D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0CACBE-5133-459B-B4D4-2E01B3BB1D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0CACBE-5133-459B-B4D4-2E01B3BB1D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0CACBE-5133-459B-B4D4-2E01B3BB1D00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
