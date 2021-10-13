@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
 using vector_unitech.log;
 using Vector_unitech_api.Extensions;
+using Vector_unitech_api.Security;
+using Vector_unitech_api.Security.Configurations;
 using vector_unitech_application.AppServices;
 using vector_unitech_application.AutoMapper;
 using vector_unitech_core.Interfaces;
@@ -139,6 +142,16 @@ namespace Vector_unitech_api
 
             #endregion
 
+
+            var tokenConfigurations = new TokenConfigurations();
+            new ConfigureFromConfigurationOptions<TokenConfigurations>(
+                    Configuration.GetSection( "TokenConfigurations" ) )
+                .Configure( tokenConfigurations );
+
+
+            services.AddJwtSecurity( tokenConfigurations );
+
+
             services.AddScoped<IAppService, AppService>();
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IMockApi, MockApi>();
@@ -153,15 +166,20 @@ namespace Vector_unitech_api
                 app.UseDeveloperExceptionPage();
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
+
             app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
-            app.UseSwaggerUI();
 
             app.UseRouting();
+
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+
             app.UseEndpoints( endpoints =>
             {
                 endpoints.MapControllers();

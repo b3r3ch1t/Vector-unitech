@@ -14,7 +14,6 @@ namespace vector_unitech_application.AutoMapper
 
 
                 .ForMember( d => d.Endereco, o => o.MapFrom( s => s.ToString() ) )
-                .ForMember( d => d.Nome, o => o.MapFrom( s => s.Nome ) )
 
                 ;
 

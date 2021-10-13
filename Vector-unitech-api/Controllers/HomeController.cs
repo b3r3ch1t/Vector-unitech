@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Vector_unitech_api.Security;
 using vector_unitech_application.AppServices;
 
 namespace Vector_unitech_api.Controllers
@@ -10,16 +11,17 @@ namespace Vector_unitech_api.Controllers
     public class HomeController : Controller
     {
         private readonly IAppService _appService;
-
-        public HomeController( IAppService appService )
+        private readonly TokenService _tokenService;
+        public HomeController( IAppService appService, TokenService tokenService )
         {
             _appService = appService;
+            _tokenService = tokenService;
         }
 
 
         [HttpGet]
         [Route( "GetAllEmails" )]
-        [AllowAnonymous]
+        [Authorize( "Admin" )]
         public async Task<IActionResult> GetAllEmails()
         {
             var response = await _appService.GetAllEmailsAsync();
@@ -40,7 +42,7 @@ namespace Vector_unitech_api.Controllers
 
         [HttpGet]
         [Route( "GetNamesGroupedByHourAsync" )]
-        [Authorize( "Admin" )]
+        [AllowAnonymous]
         public async Task<IActionResult> GetNamesGroupedByHourAsync()
         {
             var response = await _appService.GetNamesGroupedByHourAsync();
@@ -56,5 +58,28 @@ namespace Vector_unitech_api.Controllers
             return Ok( response.Result );
 
         }
+
+
+        [HttpPost]
+        [Route( "login" )]
+        [AllowAnonymous]
+        public async Task<ActionResult<dynamic>> Authenticate( [FromBody] UserLogin model )
+        {
+            var user = UserRepository.Get( model.Username, model.Password );
+
+            if ( user == null )
+                return BadRequest( new { message = "Usuário ou senha inválidos" } );
+
+            var token = await _tokenService.GenerateTokenAsync( user );
+
+            user.Password = "";
+
+            return new
+            {
+                user = user,
+                token = token
+            };
+        }
+
     }
 }
