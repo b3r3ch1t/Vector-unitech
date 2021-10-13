@@ -34,7 +34,7 @@ namespace Vector_unitech_api.Controllers
                 return NoContent();
             }
 
-            return Ok( response.Result );
+            return Ok( new { emails = response.Result } );
 
         }
 

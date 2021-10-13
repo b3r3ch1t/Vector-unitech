@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using vector_unitech_application.Models;
 using vector_unitech_core.Interfaces;
@@ -21,23 +22,21 @@ namespace vector_unitech_application.AppServices
         }
 
 
-        public async Task<OperationResult<IEnumerable<EmailModel>>> GetAllEmailsAsync()
+        public async Task<OperationResult<IEnumerable<string>>> GetAllEmailsAsync()
         {
 
             try
             {
                 var response = await _repository.GetAllEmailsAsync();
 
-                var result = _mapper.Map<IEnumerable<EmailModel>>( response );
-
-                return new OperationResult<IEnumerable<EmailModel>>( result );
+                return new OperationResult<IEnumerable<string>>( response.Select( x => x.Endereco ) );
             }
             catch ( Exception e )
             {
                 _error.Error( e );
             }
 
-            return new OperationResult<IEnumerable<EmailModel>>( message: "Erro ao retornar os dados" );
+            return new OperationResult<IEnumerable<string>>( message: "Erro ao retornar os dados" );
         }
 
         public async Task<OperationResult<IEnumerable<GroupedModel>>> GetNamesGroupedByHourAsync()
