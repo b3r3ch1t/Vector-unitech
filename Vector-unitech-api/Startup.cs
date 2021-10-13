@@ -128,7 +128,8 @@ namespace Vector_unitech_api
             } );
 
 
-            services.AddSingleton<IRedisConnection, RedisConnection>();
+            services.AddSingleton<ICacheRepository, CacheRepository>();
+
             #endregion
 
             #region AutoMapper

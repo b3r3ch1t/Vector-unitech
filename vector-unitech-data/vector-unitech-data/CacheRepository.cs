@@ -7,14 +7,13 @@ using vector_unitech_core.Utils;
 
 namespace vector_unitech_data
 {
-    public class RedisConnection : IRedisConnection
+    public class CacheRepository : ICacheRepository
     {
         private readonly ConnectionMultiplexer _conexao;
         private readonly IDatabase _database;
-
         private readonly IError _error;
 
-        public RedisConnection( IError error )
+        public CacheRepository( IError error )
         {
             _error = error;
             _conexao = ConnectionMultiplexer.Connect( AppSettings.RedisServer );
@@ -43,13 +42,15 @@ namespace vector_unitech_data
         }
 
 
-        public async Task<OperationResult<bool>> SetValueToKey<T>( string key, T value, TimeSpan timeOut )
+        public async Task<OperationResult<bool>> SetValueToKey<T>( string key, T value, DateTime expires )
         {
             try
             {
+                var expiryTimeSpan = expires.Subtract( DateTime.Now );
+
                 var serialized = JsonSerializer.Serialize( value );
 
-                var response = await _database.StringSetAsync( key: key, value: serialized, expiry: timeOut );
+                var response = await _database.StringSetAsync( key: key, value: serialized, expiryTimeSpan );
 
                 return new OperationResult<bool>( response );
             }

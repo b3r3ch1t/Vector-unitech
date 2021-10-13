@@ -8,7 +8,7 @@ namespace vector_unitech_core.Interfaces
 {
     public interface IRepository : IDisposable
     {
-        Task<IEnumerable<Email>> GetAllEmailsAsync();
+        Task<IEnumerable<Email>> GetAllEmailsAsync(string key);
         Task<IEnumerable<TestEntity>> GetNamesGroupedByHourAsync();
     }
 }

@@ -23,10 +23,11 @@ namespace vector_unitech_application.AppServices
 
         public async Task<OperationResult<IEnumerable<EmailModel>>> GetAllEmailsAsync()
         {
-            var response = await _repository.GetAllEmailsAsync();
 
             try
             {
+                var response = await _repository.GetAllEmailsAsync(TODO);
+
                 var result = _mapper.Map<IEnumerable<EmailModel>>( response );
 
                 return new OperationResult<IEnumerable<EmailModel>>( result );
