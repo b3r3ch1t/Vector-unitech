@@ -35,5 +35,26 @@ namespace Vector_unitech_api.Controllers
             return Ok( response.Result );
 
         }
+
+
+
+        [HttpGet]
+        [Route( "GetNamesGroupedByHourAsync" )]
+        [Authorize( "Admin" )]
+        public async Task<IActionResult> GetNamesGroupedByHourAsync()
+        {
+            var response = await _appService.GetNamesGroupedByHourAsync();
+
+            if ( response.Error ) return BadRequest( response.Message );
+
+
+            if ( response.Result == null )
+            {
+                return NoContent();
+            }
+
+            return Ok( response.Result );
+
+        }
     }
 }

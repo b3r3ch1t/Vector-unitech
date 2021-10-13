@@ -11,6 +11,8 @@ using Vector_unitech_api.Extensions;
 using vector_unitech_application.AppServices;
 using vector_unitech_application.AutoMapper;
 using vector_unitech_core.Interfaces;
+using vector_unitech_core.Utils;
+using vector_unitech_data;
 
 namespace Vector_unitech_api
 {
@@ -50,6 +52,8 @@ namespace Vector_unitech_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices( IServiceCollection services )
         {
+
+            AppSettings.RedisServer = Configuration.GetConnectionString( "ConexaoRedis" );
 
             services.AddControllers();
 
@@ -119,13 +123,12 @@ namespace Vector_unitech_api
 
             services.AddDistributedRedisCache( options =>
             {
-                options.Configuration =
-                    Configuration.GetConnectionString( "ConexaoRedis" );
+                options.Configuration = AppSettings.RedisServer;
                 options.InstanceName = "vector-unitech-";
             } );
 
 
-
+            services.AddSingleton<IRedisConnection, RedisConnection>();
             #endregion
 
             #region AutoMapper
@@ -135,7 +138,6 @@ namespace Vector_unitech_api
             #endregion
 
             services.AddScoped<IAppService, AppService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
