@@ -25,56 +25,61 @@ namespace vector_unitech_data
 
         public async Task<IEnumerable<Email>> GetAllEmailsAsync()
         {
+            var result = await GetAllAsync();
+
+
+            return result.Select( x => new Email( endereco: x.Mail, nome: x.Name ) );
+
+
+        }
+
+        public async Task<IEnumerable<TestEntity>> GetNamesGroupedByHourAsync()
+        {
+            var result = await GetAllAsync();
+            return result;
+        }
+
+        public async Task<IEnumerable<TestEntity>> GetAllAsync()
+        {
             try
             {
                 var valueCached = await _cacheRepository.GetValueFromKeyAsync( _key );
 
-
-                IEnumerable<Email> result;
-                if ( valueCached == null || valueCached.Error || !valueCached.Result.Any() || valueCached.Result == null )
+                if ( valueCached != null && !valueCached.Error && valueCached.Result.Any() && valueCached.Result != null )
+                    return JsonSerializer.Deserialize<IEnumerable<TestEntity>>( valueCached.Result );
+                try
                 {
-                    var responseMockApi = new List<TestEntity>();
+                    var responseMockApi = ( await _mockApi.GetAllAsync() ).Result.ToList();
 
-                    try
+                    var expiryDate = DateTime.Now.AddDays( 1 );
+
+                    var response = await _cacheRepository.SetValueToKey( _key, responseMockApi, expiryDate );
+
+
+
+                    if ( response.Error )
                     {
-                        responseMockApi = ( await _mockApi.GetAllAsync() ).Result.ToList();
-
-                        var expiryDate = DateTime.Now.AddDays( 1 );
-
-                        var response = await _cacheRepository.SetValueToKey( _key, responseMockApi, expiryDate );
-
-                        if ( response.Error )
-                        {
-                            _error.Error( response.Message );
-                        }
-                    }
-                    catch ( Exception e )
-                    {
-                        _error.Error( e );
+                        _error.Error( response.Message );
                     }
 
-                    result = responseMockApi
-                        .Select( x => new Email( endereco: x.Mail, nome: x.Name ) );
-
-                    return result;
+                    return responseMockApi;
+                }
+                catch ( Exception e )
+                {
+                    _error.Error( e );
                 }
 
-                result = JsonSerializer.Deserialize<IEnumerable<TestEntity>>( valueCached.Result )
-                    .Select( x => new Email( endereco: x.Mail, nome: x.Name ) );
 
-                return result;
+                return JsonSerializer.Deserialize<IEnumerable<TestEntity>>( valueCached.Result );
+
+
             }
             catch ( Exception e )
             {
                 _error.Error( e );
             }
 
-            return new List<Email>();
-        }
-
-        public Task<IEnumerable<TestEntity>> GetNamesGroupedByHourAsync()
-        {
-            throw new NotImplementedException();
+            return new List<TestEntity>();
         }
 
         public void Dispose()
