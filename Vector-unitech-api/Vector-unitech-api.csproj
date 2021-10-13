@@ -22,6 +22,7 @@
 		<ProjectReference Include="..\vector-unitech-application\vector-unitech-application.csproj" />
 		<ProjectReference Include="..\vector-unitech-core\vector-unitech-core\vector-unitech-core.csproj" />
 		<ProjectReference Include="..\vector-unitech-data\vector-unitech-data\vector-unitech-data.csproj" />
+		<ProjectReference Include="..\vector-unitech-service\vector-unitech-service.csproj" />
 	</ItemGroup>
 
 </Project>

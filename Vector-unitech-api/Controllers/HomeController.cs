@@ -6,7 +6,7 @@ using vector_unitech_application.AppServices;
 namespace Vector_unitech_api.Controllers
 {
     [ApiController]
-    [Route( "v1/vector_unitech/[controller]" )]
+    [Route( "v1/vector/[controller]" )]
     public class HomeController : Controller
     {
         private readonly IAppService _appService;

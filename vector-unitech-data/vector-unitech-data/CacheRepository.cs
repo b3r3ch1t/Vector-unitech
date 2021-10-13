@@ -26,6 +26,9 @@ namespace vector_unitech_data
             try
             {
                 var response = await _database.StringGetAsync( key );
+
+                if ( response.IsNullOrEmpty )
+                    return new OperationResult<string>( message: "valor não encontrado no cache" );
                 return new OperationResult<string>()
                 {
                     Error = false,

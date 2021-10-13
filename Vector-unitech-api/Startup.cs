@@ -13,6 +13,7 @@ using vector_unitech_application.AutoMapper;
 using vector_unitech_core.Interfaces;
 using vector_unitech_core.Utils;
 using vector_unitech_data;
+using vector_unitech_service;
 
 namespace Vector_unitech_api
 {
@@ -53,7 +54,7 @@ namespace Vector_unitech_api
         public void ConfigureServices( IServiceCollection services )
         {
 
-            AppSettings.RedisServer = Configuration.GetConnectionString( "ConexaoRedis" );
+            AppSettings.RedisServer = Configuration.GetConnectionString( "RedisServer" );
 
             services.AddControllers();
 
@@ -139,6 +140,9 @@ namespace Vector_unitech_api
             #endregion
 
             services.AddScoped<IAppService, AppService>();
+            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IMockApi, MockApi>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

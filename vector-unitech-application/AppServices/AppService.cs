@@ -26,7 +26,7 @@ namespace vector_unitech_application.AppServices
 
             try
             {
-                var response = await _repository.GetAllEmailsAsync(TODO);
+                var response = await _repository.GetAllEmailsAsync();
 
                 var result = _mapper.Map<IEnumerable<EmailModel>>( response );
 
