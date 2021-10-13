@@ -10,6 +10,6 @@ namespace vector_unitech_core.Interfaces
     {
         Task<IEnumerable<Email>> GetAllEmailsAsync();
         Task<IEnumerable<TestEntity>> GetAllAsync();
-        Task<IEnumerable<TestEntity>> GetNamesGroupedByHourAsync();
+        Task<IEnumerable<GroupedByHour>> GetNamesGroupedByHourAsync();
     }
 }

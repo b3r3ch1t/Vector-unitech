@@ -39,22 +39,22 @@ namespace vector_unitech_application.AppServices
             return new OperationResult<IEnumerable<string>>( message: "Erro ao retornar os dados" );
         }
 
-        public async Task<OperationResult<IEnumerable<GroupedModel>>> GetNamesGroupedByHourAsync()
+        public async Task<OperationResult<IEnumerable<GroupedByHourModel>>> GetNamesGroupedByHourAsync()
         {
             var response = await _repository.GetNamesGroupedByHourAsync();
 
             try
             {
-                var result = _mapper.Map<IEnumerable<GroupedModel>>( response );
+                var result = _mapper.Map<IEnumerable<GroupedByHourModel>>( response );
 
-                return new OperationResult<IEnumerable<GroupedModel>>( result );
+                return new OperationResult<IEnumerable<GroupedByHourModel>>( result );
             }
             catch ( Exception e )
             {
                 _error.Error( e );
             }
 
-            return new OperationResult<IEnumerable<GroupedModel>>( message: "Erro ao retornar os dados" );
+            return new OperationResult<IEnumerable<GroupedByHourModel>>( message: "Erro ao retornar os dados" );
         }
 
         public void Dispose()

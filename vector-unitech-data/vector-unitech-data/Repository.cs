@@ -27,15 +27,27 @@ namespace vector_unitech_data
         {
             var result = await GetAllAsync();
 
-
             return result.Select( x => new Email( endereco: x.Mail, nome: x.Name ) );
-
 
         }
 
-        public async Task<IEnumerable<TestEntity>> GetNamesGroupedByHourAsync()
+        public async Task<IEnumerable<GroupedByHour>> GetNamesGroupedByHourAsync()
         {
-            var result = await GetAllAsync();
+            var response = await GetAllAsync();
+
+            var result = response
+                .GroupBy( row => new
+                {
+                    Date = row.CreatedAt.Date,
+                    Hour = row.CreatedAt.Hour
+                } )
+                .Select( grp => new
+                    GroupedByHour
+                {
+                    CreatedAt = grp.Key.Date,
+                    ListEntity = grp.ToList()
+                } );
+
             return result;
         }
 

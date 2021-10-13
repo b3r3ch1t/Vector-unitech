@@ -9,6 +9,6 @@ namespace vector_unitech_application.AppServices
     public interface IAppService : IDisposable
     {
         Task<OperationResult<IEnumerable<string>>> GetAllEmailsAsync();
-        Task<OperationResult<IEnumerable<GroupedModel>>> GetNamesGroupedByHourAsync();
+        Task<OperationResult<IEnumerable<GroupedByHourModel>>> GetNamesGroupedByHourAsync();
     }
 }
