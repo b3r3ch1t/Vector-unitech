@@ -5,10 +5,6 @@
     <RootNamespace>vector_unitech_core</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Extensions.FluentValidation.Br" Version="1.0.2" />
 		<PackageReference Include="FluentValidation" Version="10.3.3" />

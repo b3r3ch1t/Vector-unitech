@@ -8,21 +8,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Serilog.Sinks.Sentry" Version="2.4.3" />
 
 		<PackageReference Include="Serilog" Version="2.10.0" />
-		<PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Controllers\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\ErroSentry\vector-unitech-log.csproj" />
+		<ProjectReference Include="..\vector-unitech-application\vector-unitech-application.csproj" />
 		<ProjectReference Include="..\vector-unitech-core\vector-unitech-core\vector-unitech-core.csproj" />
 	</ItemGroup>
 

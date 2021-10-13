@@ -352,5 +352,10 @@ namespace vector_unitech.log
         }
 
         #endregion
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize( this );
+        }
     }
 }

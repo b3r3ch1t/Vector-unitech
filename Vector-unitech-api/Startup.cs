@@ -8,6 +8,8 @@ using Serilog;
 using System;
 using vector_unitech.log;
 using Vector_unitech_api.Extensions;
+using vector_unitech_application.AppServices;
+using vector_unitech_application.AutoMapper;
 using vector_unitech_core.Interfaces;
 
 namespace Vector_unitech_api
@@ -51,7 +53,6 @@ namespace Vector_unitech_api
 
             services.AddControllers();
 
-
             #region Swagger
             services.AddSwaggerGen( options =>
             {
@@ -92,7 +93,6 @@ namespace Vector_unitech_api
                 {
                     log = new LoggerConfiguration()
                         .Enrich.FromLogContext()
-                        .WriteTo.ColoredConsole()
                         .WriteTo.Sentry( sentryDsn )
                         .CreateLogger();
                 }
@@ -101,12 +101,11 @@ namespace Vector_unitech_api
                 {
                     log = new LoggerConfiguration()
                         .Enrich.FromLogContext()
-                        .WriteTo.ColoredConsole()
                         .CreateLogger();
                 }
 
 
-                services.AddScoped<Serilog.ILogger>( x => log );
+                services.AddScoped<ILogger>( x => log );
 
                 services.AddSingleton<IError, ErroSentry>( x => new ErroSentry( sentryDsn ) );
 
@@ -115,6 +114,28 @@ namespace Vector_unitech_api
 
 
             #endregion
+
+            #region CacheRedis
+
+            services.AddDistributedRedisCache( options =>
+            {
+                options.Configuration =
+                    Configuration.GetConnectionString( "ConexaoRedis" );
+                options.InstanceName = "vector-unitech-";
+            } );
+
+
+
+            #endregion
+
+            #region AutoMapper
+
+            services.AddAutoMapperSetup();
+
+            #endregion
+
+            services.AddScoped<IAppService, AppService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,7 +2,7 @@
 
 namespace vector_unitech_core.Interfaces
 {
-    public interface IError
+    public interface IError : IDisposable
     {
 
         void Verbose( string messageTemplate );
