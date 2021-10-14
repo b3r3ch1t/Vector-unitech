@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vector-unitech-log", "ErroS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vector-unitech-application", "vector-unitech-application\vector-unitech-application.csproj", "{50C2C281-1562-4657-905A-146E783BCDBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vector-unitech-test", "Vector-unitech-test\Vector-unitech-test.csproj", "{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vector-unitech-test", "Vector-unitech-test\Vector-unitech-test.csproj", "{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C5845407-C1A2-497F-8FFC-B787A7CCD4AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5845407-C1A2-497F-8FFC-B787A7CCD4AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5845407-C1A2-497F-8FFC-B787A7CCD4AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5845407-C1A2-497F-8FFC-B787A7CCD4AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5845407-C1A2-497F-8FFC-B787A7CCD4AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

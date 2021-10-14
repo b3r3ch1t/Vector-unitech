@@ -57,7 +57,7 @@ namespace Vector_unitech_api
         public void ConfigureServices( IServiceCollection services )
         {
 
-            AppSettings.RedisServer = Configuration.GetConnectionString( "RedisServer" );
+            AppSettings.RedisServer = Configuration.GetValue<string>( "RedisServer" );
 
             services.AddControllers();
 

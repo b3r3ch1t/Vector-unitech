@@ -8,11 +8,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["Vector-unitech-api/Vector-unitech-api.csproj", "Vector-unitech-api/"]
-COPY ["ErroSentry/vector-unitech-log.csproj", "ErroSentry/"]
-COPY ["vector-unitech-core/vector-unitech-core/vector-unitech-core.csproj", "vector-unitech-core/vector-unitech-core/"]
-COPY ["vector-unitech-service/vector-unitech-service.csproj", "vector-unitech-service/"]
-COPY ["vector-unitech-data/vector-unitech-data/vector-unitech-data.csproj", "vector-unitech-data/vector-unitech-data/"]
-COPY ["vector-unitech-application/vector-unitech-application.csproj", "vector-unitech-application/"]
 RUN dotnet restore "Vector-unitech-api/Vector-unitech-api.csproj"
 COPY . .
 WORKDIR "/src/Vector-unitech-api"
