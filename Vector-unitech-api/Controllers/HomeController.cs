@@ -41,7 +41,7 @@ namespace Vector_unitech_api.Controllers
 
 
         [HttpGet]
-        [Route( "GetNamesGroupedByHourAsync" )]
+        [Route( "GetNamesGroupedByHour" )]
         [AllowAnonymous]
         public async Task<IActionResult> GetNamesGroupedByHourAsync()
         {
@@ -61,7 +61,7 @@ namespace Vector_unitech_api.Controllers
 
 
         [HttpPost]
-        [Route( "login" )]
+        [Route( "Authenticate" )]
         [AllowAnonymous]
         public async Task<ActionResult<dynamic>> Authenticate( [FromBody] UserLogin model )
         {

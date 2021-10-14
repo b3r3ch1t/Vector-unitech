@@ -3,6 +3,7 @@ version: '3.7'
 services:
   vector-unitech-api:
     image: ${DOCKER_REGISTRY-}vectorunitechapi
+    container_name: api_vector
     build:
       context: .
       dockerfile: Vector-unitech-api/Dockerfile
@@ -21,7 +22,18 @@ services:
       RedisServer: 'redis_vector'
     ports:
       - "5000:80"
-   
+  
+  vector-unitech-ocelotapigw:
+    image: ${DOCKER_REGISTRY-}vectorunitechapigw
+    container_name: apigw_vector
+    build:
+      context: .
+      dockerfile: Vector-unitech-api-gateway/Dockerfile
+    networks:
+      - code-network
+    ports:
+      - "5010:80"
+
 
   redis:
     image: redis:6.2.5-alpine
