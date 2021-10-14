@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vector-unitech-data", "vector-unitech-data\vector-unitech-data\vector-unitech-data.csproj", "{244CE9CE-FDFE-4F81-BB75-A6423D4EC1DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vector-unitech-data", "vector-unitech-data\vector-unitech-data\vector-unitech-data.csproj", "{244CE9CE-FDFE-4F81-BB75-A6423D4EC1DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vector-unitech-api", "Vector-unitech-api\Vector-unitech-api.csproj", "{E53DE428-B3BD-4194-ACEF-37B355155C4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vector-unitech-api", "Vector-unitech-api\Vector-unitech-api.csproj", "{E53DE428-B3BD-4194-ACEF-37B355155C4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vector-unitech-core", "vector-unitech-core\vector-unitech-core\vector-unitech-core.csproj", "{318D2BBD-BE80-4FD1-A88C-DC133EE8AFC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vector-unitech-core", "vector-unitech-core\vector-unitech-core\vector-unitech-core.csproj", "{318D2BBD-BE80-4FD1-A88C-DC133EE8AFC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vector-unitech-service", "vector-unitech-service\vector-unitech-service.csproj", "{D92C1E2A-B84A-4F7D-B4AD-6C42E9963E07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vector-unitech-service", "vector-unitech-service\vector-unitech-service.csproj", "{D92C1E2A-B84A-4F7D-B4AD-6C42E9963E07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vector-unitech-log", "ErroSentry\vector-unitech-log.csproj", "{BF0CACBE-5133-459B-B4D4-2E01B3BB1D00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vector-unitech-log", "ErroSentry\vector-unitech-log.csproj", "{BF0CACBE-5133-459B-B4D4-2E01B3BB1D00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vector-unitech-application", "vector-unitech-application\vector-unitech-application.csproj", "{50C2C281-1562-4657-905A-146E783BCDBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vector-unitech-application", "vector-unitech-application\vector-unitech-application.csproj", "{50C2C281-1562-4657-905A-146E783BCDBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vector-unitech-test", "Vector-unitech-test\Vector-unitech-test.csproj", "{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{50C2C281-1562-4657-905A-146E783BCDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50C2C281-1562-4657-905A-146E783BCDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50C2C281-1562-4657-905A-146E783BCDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71D813E1-0EB9-43BA-AC83-94A3F3B242AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

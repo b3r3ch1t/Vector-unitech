@@ -58,31 +58,22 @@ namespace vector_unitech_data
                 var valueCached = await _cacheRepository.GetValueFromKeyAsync( _key );
 
                 if ( valueCached != null && !valueCached.Error && valueCached.Result.Any() && valueCached.Result != null )
+
                     return JsonSerializer.Deserialize<IEnumerable<TestEntity>>( valueCached.Result );
+
+
                 try
                 {
                     var responseMockApi = ( await _mockApi.GetAllAsync() ).Result.ToList();
-
-                    var expiryDate = DateTime.Now.AddDays( 1 );
-
-                    var response = await _cacheRepository.SetValueToKey( _key, responseMockApi, expiryDate );
-
-
-
-                    if ( response.Error )
-                    {
-                        _error.Error( response.Message );
-                    }
+                    await _cacheRepository.SetValueToKey( _key, responseMockApi );
 
                     return responseMockApi;
                 }
                 catch ( Exception e )
                 {
                     _error.Error( e );
+                    return new List<TestEntity>();
                 }
-
-
-                return JsonSerializer.Deserialize<IEnumerable<TestEntity>>( valueCached.Result );
 
 
             }
@@ -96,7 +87,7 @@ namespace vector_unitech_data
 
         public void Dispose()
         {
-
+            _cacheRepository?.Dispose();
             _error?.Dispose();
             _mockApi?.Dispose();
             GC.SuppressFinalize( this );

@@ -45,10 +45,11 @@ namespace vector_unitech_data
         }
 
 
-        public async Task<OperationResult<bool>> SetValueToKey<T>( string key, T value, DateTime expires )
+        public async Task<OperationResult<bool>> SetValueToKey<T>( string key, T value )
         {
             try
             {
+                var expires = DateTime.Now.AddDays( 1 );
                 var expiryTimeSpan = expires.Subtract( DateTime.Now );
 
                 var serialized = JsonSerializer.Serialize( value );
