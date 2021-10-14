@@ -14,23 +14,21 @@ namespace Vector_unitech_test
 {
     public class VectorUnitechDataTest
     {
-        private readonly List<TestEntity> _listTestEntities;
+
         private readonly Mock<ICacheRepository> _cacheRepositoryMock;
-        private readonly Mock<IError> _error;
         private readonly Mock<IMockApi> _mockApi;
         private const string _key = "GetMockApi_";
         private readonly IRepository _repository;
 
         public VectorUnitechDataTest()
         {
-            _listTestEntities = MockApiFaker.FakerTestApi();
-            _error = new Mock<IError>();
+            var error = new Mock<IError>();
 
 
             _cacheRepositoryMock = new Mock<ICacheRepository>();
             _mockApi = new Mock<IMockApi>();
 
-            _repository = new Repository( cacheRepository: _cacheRepositoryMock.Object, error: _error.Object,
+            _repository = new Repository( cacheRepository: _cacheRepositoryMock.Object, error: error.Object,
                 _mockApi.Object );
         }
 
@@ -82,7 +80,7 @@ namespace Vector_unitech_test
 
             _cacheRepositoryMock.Setup( x => x.GetValueFromKeyAsync( _key ) ).Throws( exception );
 
-            var expected = new List<TestEntity>().Count();
+            var expected = new List<TestEntity>().Count;
             var actual = await _repository.GetAllAsync();
             Assert.Equal( expected, actual.Count() );
             _mockApi.Verify( x => x.GetAllAsync(), Times.Never );
@@ -95,7 +93,6 @@ namespace Vector_unitech_test
         {
             var exception = new Exception( "Erro in Redis" );
 
-            var listTestEntities = MockApiFaker.FakerTestApi();
 
             _cacheRepositoryMock.Setup( x => x.GetValueFromKeyAsync( _key ) ).Returns( Task.FromResult( new OperationResult<string>( message: "Erro ao ler dados" ) ) );
 
@@ -103,7 +100,7 @@ namespace Vector_unitech_test
             _mockApi.Setup( x => x.GetAllAsync() ).Throws( exception );
 
 
-            var expected = new List<TestEntity>().Count();
+            var expected = new List<TestEntity>().Count;
             var actual = await _repository.GetAllAsync();
             Assert.Equal( expected, actual.Count() );
 

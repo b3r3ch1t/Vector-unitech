@@ -76,7 +76,7 @@ namespace Vector_unitech_api.Controllers
 
             return Ok( new
             {
-                user = user,
+                user,
                 token = token.Result
             } );
         }

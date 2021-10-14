@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,13 +14,13 @@ namespace Vector_unitech_api.Security
     public class TokenService
     {
 
-        private readonly IDistributedCache _cache;
+
         private readonly TokenConfigurations _tokenConfigurations;
         private readonly SigningConfigurations _signingConfigurations;
 
-        public TokenService( IDistributedCache cache, TokenConfigurations tokenConfigurations, SigningConfigurations signingConfigurations )
+        public TokenService( TokenConfigurations tokenConfigurations, SigningConfigurations signingConfigurations )
         {
-            _cache = cache;
+
             _tokenConfigurations = tokenConfigurations;
             _signingConfigurations = signingConfigurations;
         }

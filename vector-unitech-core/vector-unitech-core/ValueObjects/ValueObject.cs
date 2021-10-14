@@ -7,7 +7,7 @@ namespace vector_unitech_core.ValueObjects
     {
         public ValidationResult ValidationResult { get; protected set; }
 
-        public ValueObject()
+        protected ValueObject()
         {
             ValidationResult = new ValidationResult();
         }

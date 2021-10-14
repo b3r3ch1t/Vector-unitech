@@ -13,7 +13,7 @@ namespace vector_unitech_api_gateway
 
         public static IHostBuilder CreateHostBuilder( string[] args ) =>
             Host.CreateDefaultBuilder( args )
-                .ConfigureAppConfiguration( ( hostingContext, config ) =>
+                .ConfigureAppConfiguration( ( config ) =>
                 {
                     config.AddJsonFile( "Ocelot.json", false, true );
                 } )

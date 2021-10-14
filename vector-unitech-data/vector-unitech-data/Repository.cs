@@ -38,8 +38,8 @@ namespace vector_unitech_data
             var result = response
                 .GroupBy( row => new
                 {
-                    Date = row.CreatedAt.Date,
-                    Hour = row.CreatedAt.Hour
+                    row.CreatedAt.Date,
+                    row.CreatedAt.Hour
                 } )
                 .Select( grp => new
                     GroupedByHour

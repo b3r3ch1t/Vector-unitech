@@ -166,7 +166,7 @@ namespace Vector_unitech_api
                 app.UseDeveloperExceptionPage();
             }
 
-
+            app.UseGlobalExceptionHandlerMiddleware();
             app.UseSwagger();
             app.UseSwaggerUI();
 
