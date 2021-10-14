@@ -22,6 +22,9 @@ services:
       RedisServer: 'redis_vector'
     ports:
       - "5000:80"
+    expose:
+      - "80"
+      - "5000"
   
   vector-unitech-ocelotapigw:
     image: ${DOCKER_REGISTRY-}vectorunitechapigw

@@ -1,49 +1,50 @@
 ﻿{
   "Routes": [
-    //Lista Email
-    {
-      "DownstreamPathTemplate": "​v1​/vector​/Home​/GetAllEmails",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "api_vector",
-          "Port": "5000"
-        }
-      ],
-      "UpstreamPathTemplate": "/ListEmail",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
-
-    //Lista Email Agrupado
+    //ListEmailAgrupado
     {
       "DownstreamPathTemplate": "/v1/vector/Home/GetNamesGroupedByHour",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "api_vector",
-          "Port": "5000"
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/ListEmailGrouped",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
     },
-
-    //Generate Token
+    //ListEmail
     {
-      "DownstreamPathTemplate": "v1/vector/Home/Authenticate",
+      "DownstreamPathTemplate": "/v1/vector/Home/GetAllEmails",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "api_vector",
-          "Port": "5000"
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ListEmail",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    //ListEmail
+    {
+      "DownstreamPathTemplate": "/v1/vector/Home/Authenticate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "api_vector",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Authenticate",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
     }
-
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5010"
+    "BaseUrl": null,
+    "http": "localhost:5010"
   }
 }
